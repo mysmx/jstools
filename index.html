@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tools</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+      body{
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      #flex-container {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: row;
+        flex-direction: row;
+      }
+
+      #flex-container > .flex-item {
+        -webkit-flex: auto;
+        flex: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="index.js"></script>
+    <div id="flex-container">
+      <div class="flex-item">
+      <b>m80date</b>
+      <hr>
+      10.11.2022 <button data-val="10.11.2022">str2date</button><br><br>
+      2022-11-10 <button data-val="2022-11-10">makeDate</button><br><br>
+      10.11.2022 <button data-val="10.11.2022">makeDateSQL</button><br><br>
+      10.11.2022 <button data-val="10.11.2022">makeDateRus</button><br><br>
+      10.11.2022 - 10.02.2023 (months or years) <button data-val="10.11.2022" data-val2="10.02.2023">calcDate</button><br><br>
+      31.10.1980 <button data-val="31.10.1980">getAge</button><br><br>
+      </div>
+      <div class="flex-item">
+      <b>m80text</b>
+      <hr>
+      surname <button data-val="surname">ucFirst</button><br><br>
+      1 <button data-val="1">pad</button><br><br>
+      scrool <button data-val="scrool">scrollTo</button><br><br>
+      heLLo <button data-val="heLLo">strLower</button><br><br>
+      </div>
+      <div class="flex-item">
+      <b>m80var</b>
+      <hr>
+      ['1','4'],'1' <button>in_arr</button><br><br>
+      text <button data-val="text0">isset</button><br><br>
+      ?name=max <button id="scrool">getUrlParameter</button><br><br>
+      </div>
+    </div>
+    <script>
+      document.querySelectorAll('button').forEach(occurence => {
+        occurence.addEventListener('click', (e) => {
+          let res = '', 
+          val = occurence.dataset.val,
+          val2 = occurence.dataset.val2;
+          switch (occurence.innerHTML) {
+          case 'str2date':  res = m80date.str2date(val); break;
+          case 'makeDate':  res = m80date.makeDate(val); break;
+          case 'makeDateSQL':  res = m80date.makeDateSQL(val); break;
+          case 'makeDateRus':  res = m80date.makeDateRus(val); break;
+          case 'calcDate':  res = m80date.calcDate(m80date.str2date(val),m80date.str2date(val2),'months'); break;
+          case 'getAge':  res = m80date.getAge(val); break;
+          case 'ucFirst':  res = m80text.ucFirst(val); break;
+          case 'pad':  res = m80text.pad(val); break;
+          case 'scrollTo':  res = m80text.scrollTo(val); return false; break;
+          case 'strLower':  res = m80text.strLower(val); break;
+          case 'in_arr':  res = m80var.in_arr(['1','4'],'4'); break;
+          case 'isset':  res = m80var.isset(val); break;
+          case 'getUrlParameter':  res = m80var.getUrlParameter('name'); break;
+        }
+        alert(res);
+        });
+      });
+    </script>
+  </body>
+</html>
